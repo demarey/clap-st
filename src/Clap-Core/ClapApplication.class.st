@@ -50,7 +50,8 @@ ClapApplication >> execute [
 
 { #category : #execution }
 ClapApplication >> executeWithContext: aClapContext [
-	context := aClapContext.
+	self context: aClapContext.
+	self context validateAll.
 	(self hasFlag: #help)
 		ifTrue: [ self printHelp. self exitSuccess ]
 		ifFalse: [ self execute ]
