@@ -136,6 +136,7 @@ ClapContext >> command [
 	self match. "ensure command is matched"
 	^ (self specification commandClass with: self parsedArguments)
 		context: self;
+		initializeWithContext;
 		yourself
 ]
 

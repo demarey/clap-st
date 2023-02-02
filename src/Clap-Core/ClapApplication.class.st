@@ -44,13 +44,18 @@ ClapApplication >> context: aClapContext [
 ]
 
 { #category : #execution }
+ClapApplication >> errorStreamDo: aBlock [
+	aBlock value: self context stderr
+]
+
+{ #category : #execution }
 ClapApplication >> execute [
 	self subclassResponsibility
 ]
 
 { #category : #execution }
 ClapApplication >> executeWithContext: aClapContext [
-	self context: aClapContext.
+
 	self context validateAll.
 	(self hasFlag: #help)
 		ifTrue: [ self printHelp. self exitSuccess ]
@@ -73,6 +78,14 @@ ClapApplication >> hasFlag: anIdentifier [
 	
 	flags := arguments at: #flags ifAbsent: [ ^ false ].
 	^ flags includes: anIdentifier
+]
+
+{ #category : #initialization }
+ClapApplication >> initializeWithContext [
+	
+	"this initialization is invoked, right after the context is being set
+	 this is needed for initialization that is dependent on context instance
+	"
 ]
 
 { #category : #execution }
